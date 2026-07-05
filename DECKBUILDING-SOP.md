@@ -282,11 +282,29 @@ end of every change that touches it** (stale counts/headers are the recurring dr
 | `interactions.md` | **verified** card text + rules notes for key interactions | when an interaction changes |
 | `CANDIDATES.md` | add-bench (ranked, with cuts) **+ Watchlist** cut-bench | when triaging |
 | `land-reference.md` | exact production + fetch targets per land | mana-base changes |
+| `oracle-cache.md` | verified oracle text + approximate prices for every deck card and CANDIDATES entry | every version bump; price spot-check monthly |
 | an export (`moxfield.txt`) | importable list; regenerate from `decklist.md` | every version bump |
 
 **Optional / create-when-needed:** a pending-routines queue (e.g. `PENDING-ROUTINES.md`) when a
 backlog of routines accrues; per-deck playtest findings (`PLAYTEST-FINDINGS.md`); a `RETROSPECTIVE.md`
 at the end of a build. Make these on demand — don't carry empty scaffolding between decks.
+
+**`oracle-cache.md` — why it exists and how to maintain it.**
+Cloud routines (remote agents) cannot use the Scryfall MCP without interactive approval, and using
+WebSearch for every card lookup burns token usage fast (one search per card × 99 cards = ~100 searches
+per routine). The oracle cache pre-populates oracle text and prices locally so routines read a file
+instead of hitting the network.
+
+Structure:
+- A price table with one row per card, approximate price, and a ⚠️ flag for cards to spot-check
+- Oracle text blocks organized by decklist section
+- CANDIDATES/Watchlist entries at the bottom
+
+Maintenance rules:
+1. **After any version bump:** add new cards to the cache (oracle text + price) before running the next routine. Remove or move cut cards to a "Graduated/Cut" section.
+2. **Before a budget pass:** WebSearch the ⚠️-flagged high-cost cards to verify current prices. Update the price table and the estimated total.
+3. **Routine operating rule:** every `PENDING-ROUTINES.md` should say "read `oracle-cache.md` first; only use WebSearch for cards not in the cache or flagged ⚠️."
+4. Oracle text almost never changes (errata are rare) — re-verify only if a ruling or errata is announced.
 
 ---
 
@@ -363,3 +381,24 @@ Strionic Resonator looks powerful alongside Springheart but is actually worse th
 
 **Dependency check is non-negotiable.**
 A card's value depends entirely on what else is in the deck. World Shaper (dies → return all graveyard lands) looks strong but requires (a) a sac outlet and (b) repeatable self-mill — neither of which this deck had. It was added, found dead in testing, and replaced. Before locking any add, confirm the deck supports what the card needs: a death trigger needs a way to die; a graveyard payoff needs a way to fill the yard; a loop needs the enabler chain intact.
+
+---
+
+### Deck 2: Terra, Magical Adept (2026-07-04 → ongoing)
+*Source repo: `arburka/mtg-terra`. 5-color enchantress/Saga + enchantment reanimator. Phase 3 in progress.*
+
+**The oracle cache pattern — eliminate network calls in cloud routines.**
+Cloud routines (remote scheduled agents) cannot use the Scryfall MCP without interactive user approval, and using WebSearch for every card lookup burns significant token usage (~100 searches per routine for a 99-card deck). Solution: create `oracle-cache.md` at the end of Phase 2 with verified oracle text and approximate prices for every deck card and CANDIDATES entry. Routines read the file instead of hitting the network. Only WebSearch the small set of high-cost cards (⚠️-flagged) when running a budget audit.
+
+Maintenance: add new cards to the cache after each version bump; spot-check ⚠️-flagged prices before each budget pass. Oracle text almost never needs re-verification (errata are rare).
+
+Add `oracle-cache.md` creation to the Phase 2 → Phase 3 transition checklist. Add a Cache Refresh routine to `PENDING-ROUTINES.md` so it stays current automatically. See §10 for the full maintenance rules.
+
+**Cloud routine MCP approval blocks unattended runs.**
+Even with MCP tool calls pre-approved in `settings.json`, the MCP *server connection* requires interactive approval and will block a scheduled remote agent. Hard-ban MCP tools in `PENDING-ROUTINES.md` operating rules: "Do NOT use Scryfall MCP tools. Read `oracle-cache.md` first; only use WebSearch for cards not in the cache." This makes routines fully unattended.
+
+**Finality counter loop requires a counter-removal piece.**
+Yuna, Hope of Spira and Rydia, Summoner of Mist both return cards with finality counters — the card is exiled on next death instead of going to the graveyard, making reanimation one-shot per card. To enable a loop, include a cheap counter-removal piece (e.g. O'aka, Traveling Merchant: tap + remove counter → draw a card). Without this, the recursion engine is a sequence, not a loop.
+
+**Saga copy tokens are sacrificed before combat via SBA — not after.**
+When Esper Terra copies a Saga, the token enters with 1 lore counter, Terra immediately adds up to 3 more, all chapter triggers fire, and the Saga SBA sacrifices the token before the main phase ends — well before combat. Any "win condition" that requires the copy to deal combat damage (e.g. Summon: Primal Odin's Zantetsuken) will never trigger on a Terra-made copy. Verify copy-dependent win conditions explicitly against SBA timing before including them.
