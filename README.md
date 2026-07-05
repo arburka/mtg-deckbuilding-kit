@@ -20,9 +20,20 @@ A portable, deck-agnostic method for building and refining Commander/EDH decks w
 
 That's it. The SOP tells Claude exactly what to do at each phase.
 
-## Installing the wrap-up command globally
+## Installing commands globally
 
-Copy `templates/wrap-up.md` to `~/.claude/commands/wrap-up.md` once. Then `/wrap-up` works in every project without any per-repo setup. A deck repo can override it by placing its own `.claude/commands/wrap-up.md` for deck-specific steps.
+Copy both command files to `~/.claude/commands/` once:
+
+```bash
+cp templates/wrap-up.md ~/.claude/commands/wrap-up.md
+cp templates/new-deck.md ~/.claude/commands/new-deck.md
+```
+
+Then:
+- `/new-deck` — starts a new deck from scratch, follows the SOP lifecycle in order (Phase 0 tooling → Phase 1 identity → Phase 2 skeleton). **Always use this when starting a new deck** — it ensures Phase 0 tooling is verified and the oracle cache is created before any cloud routines run.
+- `/wrap-up` — end-of-session wrap-up for any project.
+
+A deck repo can override either command by placing its own `.claude/commands/<command>.md`.
 
 ## Updating this kit after each deck build
 
