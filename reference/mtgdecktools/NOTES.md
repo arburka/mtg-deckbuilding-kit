@@ -16,18 +16,18 @@ We run its prompts through Claude a few times, capture each run, and use what we
 
 | Date | Tool | Deck | File | Verdict |
 |---|---|---|---|---|
-| | | | | |
+| 2026-10-17 | Tuner (Explore New Cards) | Tayam | [run](runs/2026-10-17-tuner-tayam.md) | Prompt is data-rich; import mis-matched 4 card names; filter too broad |
 
 ## Patterns across runs
 
 ### What their prompts ask for
--
+- Full oracle text + EDHREC inclusion/synergy for every deck and pool card; synergy-first ranking; bracket as a ceiling; strict JSON with HTML tables (run 1)
 
 ### What our SOP adds
--
+- Deck house rules (no-search, MV caps, budget) the site prompt has no slot for (run 1)
 
 ### What we'd change in our own version
--
+- Verify every imported name before analysis; cap the candidate pool; read house rules from the deck's `CLAUDE.md` (run 1)
 
 ## Next step
 
