@@ -12,6 +12,10 @@
 > **How to update this file.** After each deck build, add a dated entry to **Appendix B** with
 > any high-level learnings not already captured in §0–§10. If a learning is universal, fold it
 > in directly and note the source deck in a parenthetical.
+>
+> **Reference notes.** Command Zone episode summaries that back this method live in the kit at
+> `mtg-deckbuilding-kit/reference/command-zone/` (index in its `README.md`). Sections below
+> point to the relevant note; paths are relative to that folder.
 
 ---
 
@@ -60,6 +64,9 @@ The single biggest time-sink in a build is a card-data pipeline you *assumed* wo
   doesn't open the primary combo. *(Validated: the command-zone engine carried every off-engine
   goldfish hand.)*
 
+*Reference:* `method/740-your-commander-may-be-the-problem.md` (what makes a commander easy to
+build around: clear strategy, step-by-step play pattern, a value engine).
+
 ---
 
 ## §3 — Phase 2: Template skeleton + overlap-inclusive counting
@@ -84,6 +91,11 @@ Targeted Disruption; a draw-on-landfall creature is Payoff *and* Card Advantage.
 well over 100 — that overlap is where good deckbuilding lives. **This single step dissolves most
 imagined "gaps."** Always recount honestly *before* concluding a category is short.
 
+*Reference:* `method/658-deckbuilding-template.md` (category definitions),
+`method/659-problem-with-templates.md` (when to deviate from the numbers, and a troubleshooting
+table for common complaints), `method/733-overlap.md` (counting multi-role cards),
+`method/mana-curve.md` (curve targets), `method/mass-disruption.md`.
+
 ---
 
 ## §4 — Card selection
@@ -105,6 +117,14 @@ then verify card text before trusting either.
   cards that do X's job, not one better X.
 - **Asymmetric-through-deckbuilding.** Symmetric effects (everyone draws/ramps) are fine when
   *your* deck abuses them far harder than the table.
+- **Know why it beats the staple.** Before locking a pick, run the 7-question checklist in
+  `card-selection-principles.md`: what else it does, its effective cost, when it's bad, what it
+  needs, the rules detail that separates it from its comparison card, how the table will react,
+  and why it's better here than the most-played option.
+
+*Reference:* `card-selection-principles.md`, `method/762-level-up-your-removal.md` (building the
+disruption package), `card-evaluation/` (staple pricing, budget replacements, common
+misjudgments).
 
 **Dependency check** *(before locking any add).* Confirm the rest of the deck **supports what the
 card needs.** A payoff that needs a full graveyard is dead if you don't fill the yard; a card that
@@ -168,6 +188,9 @@ cutting two duals for one "better" dual is a *net loss* of color access. Keep a
 **Default lightweight.** Not every observation needs a file edit + commit + long write-up. Reserve
 the full docs-and-commit treatment for durable changes (card swaps, version bumps); a quick note or
 a one-line memory is enough for the rest.
+
+*Reference:* `method/making-your-deck-less-boring.md` (iterating for play experience once the
+deck works: cut tutors and power outliers, add decision points and variance).
 
 ---
 

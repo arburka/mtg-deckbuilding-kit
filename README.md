@@ -10,6 +10,7 @@ A portable, deck-agnostic method for building and refining Commander/EDH decks w
 | `templates/CLAUDE.md` | Blank deck-specific context file — fill in commander, plan, engine, key decisions |
 | `templates/CANDIDATES.md` | Blank candidate ledger + Watchlist |
 | `templates/wrap-up.md` | Generic end-of-session wrap-up command — install globally so `/wrap-up` works in every repo |
+| `reference/command-zone/` | Command Zone episode summaries behind the SOP (template, overlap, curve, removal, card evaluation) plus `card-selection-principles.md`. Index in its `README.md`. |
 
 ## Starting a new deck
 
