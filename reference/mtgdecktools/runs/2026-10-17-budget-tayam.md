@@ -35,4 +35,4 @@ Not yet pasted back.
   - List the expensive cards being kept, with the reason for each.
 
 ## Applied to the deck?
-Pending the user's decision (it would be v3: Kutzil → Inspiring Call).
+Applied as `mtg-tayam` v3 (Kutzil, Malamet Exemplar → Inspiring Call).
