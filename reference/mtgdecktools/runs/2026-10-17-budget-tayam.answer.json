@@ -1,0 +1,350 @@
+{
+  "deckName": "Tayam's Endless Procession",
+  "deckList": [
+    {
+      "cardName": "Tayam, Luminous Enigma",
+      "quantity": 1
+    },
+    {
+      "cardName": "Abzan Ascendancy",
+      "quantity": 1
+    },
+    {
+      "cardName": "Abzan Falconer",
+      "quantity": 1
+    },
+    {
+      "cardName": "Armorcraft Judge",
+      "quantity": 1
+    },
+    {
+      "cardName": "Bartolomé del Presidio",
+      "quantity": 1
+    },
+    {
+      "cardName": "Basking Broodscale",
+      "quantity": 1
+    },
+    {
+      "cardName": "Bastion of Remembrance",
+      "quantity": 1
+    },
+    {
+      "cardName": "Blood Artist",
+      "quantity": 1
+    },
+    {
+      "cardName": "Cankerbloom",
+      "quantity": 1
+    },
+    {
+      "cardName": "Canopy Vista",
+      "quantity": 1
+    },
+    {
+      "cardName": "Carrion Feeder",
+      "quantity": 1
+    },
+    {
+      "cardName": "Caves of Koilos",
+      "quantity": 1
+    },
+    {
+      "cardName": "Command Tower",
+      "quantity": 1
+    },
+    {
+      "cardName": "Commune with the Gods",
+      "quantity": 1
+    },
+    {
+      "cardName": "Conclave Mentor",
+      "quantity": 1
+    },
+    {
+      "cardName": "Cruel Celebrant",
+      "quantity": 1
+    },
+    {
+      "cardName": "Cryptic Trilobite",
+      "quantity": 1
+    },
+    {
+      "cardName": "Demon's Disciple",
+      "quantity": 1
+    },
+    {
+      "cardName": "Eternal Witness",
+      "quantity": 1
+    },
+    {
+      "cardName": "Evolution Sage",
+      "quantity": 1
+    },
+    {
+      "cardName": "Executioner's Capsule",
+      "quantity": 1
+    },
+    {
+      "cardName": "Exotic Orchard",
+      "quantity": 1
+    },
+    {
+      "cardName": "Feast of the Victorious Dead",
+      "quantity": 1
+    },
+    {
+      "cardName": "Fiend Hunter",
+      "quantity": 1
+    },
+    {
+      "cardName": "Fleshbag Marauder",
+      "quantity": 1
+    },
+    {
+      "cardName": "Forest",
+      "quantity": 7
+    },
+    {
+      "cardName": "Ghave, Guru of Spores",
+      "quantity": 1
+    },
+    {
+      "cardName": "Golgari Rot Farm",
+      "quantity": 1
+    },
+    {
+      "cardName": "Grasp of Fate",
+      "quantity": 1
+    },
+    {
+      "cardName": "Grisly Salvage",
+      "quantity": 1
+    },
+    {
+      "cardName": "Hagra Constrictor",
+      "quantity": 1
+    },
+    {
+      "cardName": "Hardened Scales",
+      "quantity": 1
+    },
+    {
+      "cardName": "Haywire Mite",
+      "quantity": 1
+    },
+    {
+      "cardName": "Hollowmurk Siege",
+      "quantity": 1
+    },
+    {
+      "cardName": "Incubation Druid",
+      "quantity": 1
+    },
+    {
+      "cardName": "Insidious Roots",
+      "quantity": 1
+    },
+    {
+      "cardName": "Inspiring Call",
+      "quantity": 1
+    },
+    {
+      "cardName": "Kitchen Finks",
+      "quantity": 1
+    },
+    {
+      "cardName": "Life from the Loam",
+      "quantity": 1
+    },
+    {
+      "cardName": "Llanowar Wastes",
+      "quantity": 1
+    },
+    {
+      "cardName": "Merciless Executioner",
+      "quantity": 1
+    },
+    {
+      "cardName": "Nadier's Nightblade",
+      "quantity": 1
+    },
+    {
+      "cardName": "Necroblossom Snarl",
+      "quantity": 1
+    },
+    {
+      "cardName": "Path of Ancestry",
+      "quantity": 1
+    },
+    {
+      "cardName": "Patrolling Peacemaker",
+      "quantity": 1
+    },
+    {
+      "cardName": "Pernicious Deed",
+      "quantity": 1
+    },
+    {
+      "cardName": "Plaguecrafter",
+      "quantity": 1
+    },
+    {
+      "cardName": "Plains",
+      "quantity": 6
+    },
+    {
+      "cardName": "Priest of Forgotten Gods",
+      "quantity": 1
+    },
+    {
+      "cardName": "Putrid Goblin",
+      "quantity": 1
+    },
+    {
+      "cardName": "Ransack the Lab",
+      "quantity": 1
+    },
+    {
+      "cardName": "Ravenous Chupacabra",
+      "quantity": 1
+    },
+    {
+      "cardName": "Rishkar, Peema Renegade",
+      "quantity": 1
+    },
+    {
+      "cardName": "Safehold Elite",
+      "quantity": 1
+    },
+    {
+      "cardName": "Saffi Eriksdotter",
+      "quantity": 1
+    },
+    {
+      "cardName": "Sandsteppe Citadel",
+      "quantity": 1
+    },
+    {
+      "cardName": "Satyr Wayfinder",
+      "quantity": 1
+    },
+    {
+      "cardName": "Scurry Oak",
+      "quantity": 1
+    },
+    {
+      "cardName": "Seal of Cleansing",
+      "quantity": 1
+    },
+    {
+      "cardName": "Seal of Primordium",
+      "quantity": 1
+    },
+    {
+      "cardName": "Selfless Savior",
+      "quantity": 1
+    },
+    {
+      "cardName": "Shineshadow Snarl",
+      "quantity": 1
+    },
+    {
+      "cardName": "Skullclamp",
+      "quantity": 1
+    },
+    {
+      "cardName": "Skyclave Apparition",
+      "quantity": 1
+    },
+    {
+      "cardName": "Spore Frog",
+      "quantity": 1
+    },
+    {
+      "cardName": "Stitcher's Supplier",
+      "quantity": 1
+    },
+    {
+      "cardName": "Storm of Souls",
+      "quantity": 1
+    },
+    {
+      "cardName": "Strangleroot Geist",
+      "quantity": 1
+    },
+    {
+      "cardName": "Swamp",
+      "quantity": 6
+    },
+    {
+      "cardName": "Tainted Field",
+      "quantity": 1
+    },
+    {
+      "cardName": "Tainted Wood",
+      "quantity": 1
+    },
+    {
+      "cardName": "Thriving Grove",
+      "quantity": 1
+    },
+    {
+      "cardName": "Thriving Heath",
+      "quantity": 1
+    },
+    {
+      "cardName": "Thriving Moor",
+      "quantity": 1
+    },
+    {
+      "cardName": "Undead Butler",
+      "quantity": 1
+    },
+    {
+      "cardName": "Viscera Seer",
+      "quantity": 1
+    },
+    {
+      "cardName": "Vizier of Remedies",
+      "quantity": 1
+    },
+    {
+      "cardName": "Wall of Roots",
+      "quantity": 1
+    },
+    {
+      "cardName": "Weaponcraft Enthusiast",
+      "quantity": 1
+    },
+    {
+      "cardName": "Wickerbough Elder",
+      "quantity": 1
+    },
+    {
+      "cardName": "Winding Constrictor",
+      "quantity": 1
+    },
+    {
+      "cardName": "Woe Strider",
+      "quantity": 1
+    },
+    {
+      "cardName": "Young Wolf",
+      "quantity": 1
+    },
+    {
+      "cardName": "Zulaport Cutthroat",
+      "quantity": 1
+    }
+  ],
+  "verification": {
+    "verificationScript": {
+      "language": "python",
+      "code": "decklist = [{'cardName': 'Tayam, Luminous Enigma', 'quantity': 1}, {'cardName': 'Abzan Ascendancy', 'quantity': 1}, {'cardName': 'Abzan Falconer', 'quantity': 1}, {'cardName': 'Armorcraft Judge', 'quantity': 1}, {'cardName': 'Bartolomé del Presidio', 'quantity': 1}, {'cardName': 'Basking Broodscale', 'quantity': 1}, {'cardName': 'Bastion of Remembrance', 'quantity': 1}, {'cardName': 'Blood Artist', 'quantity': 1}, {'cardName': 'Cankerbloom', 'quantity': 1}, {'cardName': 'Canopy Vista', 'quantity': 1}, {'cardName': 'Carrion Feeder', 'quantity': 1}, {'cardName': 'Caves of Koilos', 'quantity': 1}, {'cardName': 'Command Tower', 'quantity': 1}, {'cardName': 'Commune with the Gods', 'quantity': 1}, {'cardName': 'Conclave Mentor', 'quantity': 1}, {'cardName': 'Cruel Celebrant', 'quantity': 1}, {'cardName': 'Cryptic Trilobite', 'quantity': 1}, {'cardName': \"Demon's Disciple\", 'quantity': 1}, {'cardName': 'Eternal Witness', 'quantity': 1}, {'cardName': 'Evolution Sage', 'quantity': 1}, {'cardName': \"Executioner's Capsule\", 'quantity': 1}, {'cardName': 'Exotic Orchard', 'quantity': 1}, {'cardName': 'Feast of the Victorious Dead', 'quantity': 1}, {'cardName': 'Fiend Hunter', 'quantity': 1}, {'cardName': 'Fleshbag Marauder', 'quantity': 1}, {'cardName': 'Forest', 'quantity': 7}, {'cardName': 'Ghave, Guru of Spores', 'quantity': 1}, {'cardName': 'Golgari Rot Farm', 'quantity': 1}, {'cardName': 'Grasp of Fate', 'quantity': 1}, {'cardName': 'Grisly Salvage', 'quantity': 1}, {'cardName': 'Hagra Constrictor', 'quantity': 1}, {'cardName': 'Hardened Scales', 'quantity': 1}, {'cardName': 'Haywire Mite', 'quantity': 1}, {'cardName': 'Hollowmurk Siege', 'quantity': 1}, {'cardName': 'Incubation Druid', 'quantity': 1}, {'cardName': 'Insidious Roots', 'quantity': 1}, {'cardName': 'Inspiring Call', 'quantity': 1}, {'cardName': 'Kitchen Finks', 'quantity': 1}, {'cardName': 'Life from the Loam', 'quantity': 1}, {'cardName': 'Llanowar Wastes', 'quantity': 1}, {'cardName': 'Merciless Executioner', 'quantity': 1}, {'cardName': \"Nadier's Nightblade\", 'quantity': 1}, {'cardName': 'Necroblossom Snarl', 'quantity': 1}, {'cardName': 'Path of Ancestry', 'quantity': 1}, {'cardName': 'Patrolling Peacemaker', 'quantity': 1}, {'cardName': 'Pernicious Deed', 'quantity': 1}, {'cardName': 'Plaguecrafter', 'quantity': 1}, {'cardName': 'Plains', 'quantity': 6}, {'cardName': 'Priest of Forgotten Gods', 'quantity': 1}, {'cardName': 'Putrid Goblin', 'quantity': 1}, {'cardName': 'Ransack the Lab', 'quantity': 1}, {'cardName': 'Ravenous Chupacabra', 'quantity': 1}, {'cardName': 'Rishkar, Peema Renegade', 'quantity': 1}, {'cardName': 'Safehold Elite', 'quantity': 1}, {'cardName': 'Saffi Eriksdotter', 'quantity': 1}, {'cardName': 'Sandsteppe Citadel', 'quantity': 1}, {'cardName': 'Satyr Wayfinder', 'quantity': 1}, {'cardName': 'Scurry Oak', 'quantity': 1}, {'cardName': 'Seal of Cleansing', 'quantity': 1}, {'cardName': 'Seal of Primordium', 'quantity': 1}, {'cardName': 'Selfless Savior', 'quantity': 1}, {'cardName': 'Shineshadow Snarl', 'quantity': 1}, {'cardName': 'Skullclamp', 'quantity': 1}, {'cardName': 'Skyclave Apparition', 'quantity': 1}, {'cardName': 'Spore Frog', 'quantity': 1}, {'cardName': \"Stitcher's Supplier\", 'quantity': 1}, {'cardName': 'Storm of Souls', 'quantity': 1}, {'cardName': 'Strangleroot Geist', 'quantity': 1}, {'cardName': 'Swamp', 'quantity': 6}, {'cardName': 'Tainted Field', 'quantity': 1}, {'cardName': 'Tainted Wood', 'quantity': 1}, {'cardName': 'Thriving Grove', 'quantity': 1}, {'cardName': 'Thriving Heath', 'quantity': 1}, {'cardName': 'Thriving Moor', 'quantity': 1}, {'cardName': 'Undead Butler', 'quantity': 1}, {'cardName': 'Viscera Seer', 'quantity': 1}, {'cardName': 'Vizier of Remedies', 'quantity': 1}, {'cardName': 'Wall of Roots', 'quantity': 1}, {'cardName': 'Weaponcraft Enthusiast', 'quantity': 1}, {'cardName': 'Wickerbough Elder', 'quantity': 1}, {'cardName': 'Winding Constrictor', 'quantity': 1}, {'cardName': 'Woe Strider', 'quantity': 1}, {'cardName': 'Young Wolf', 'quantity': 1}, {'cardName': 'Zulaport Cutthroat', 'quantity': 1}]\nbasics = {'Forest','Plains','Swamp'}\ntotal = sum(c['quantity'] for c in decklist)\nnames = [c['cardName'] for c in decklist]\nassert total == 100, total\nassert len(names) == len(set(names))\nassert all(c['quantity'] == 1 for c in decklist if c['cardName'] not in basics)\nassert 'Tayam, Luminous Enigma' in names\nprint(f'Total: {total} - all checks passed')"
+    },
+    "totalCount": 100
+  },
+  "strategyPrimer": "<p><strong>Summary of changes</strong></p><ul><li>Cut <code>Kutzil, Malamet Exemplar</code> ($15.39); add <code>Inspiring Call</code> (about $0.30).</li><li>Name corrections so the list matches the cards owned: <code>Life from the Loam</code>, <code>Commune with the Gods</code>, <code>Golgari Rot Farm</code>, <code>Ransack the Lab</code>.</li></ul><p><strong>Reasoning</strong></p><ul><li><code>Kutzil</code> is the most expensive card in the deck at roughly a sixth of the total budget. Its role here is card draw: one card when pumped creatures deal combat damage to a player, which depends on getting through blockers.</li><li><code>Inspiring Call</code> fills the same role more directly: at instant speed it draws a card for each creature with a +1/+1 counter and makes those creatures indestructible until end of turn. That doubles as protection against a board wipe, which Kutzil does not offer.</li><li>Expensive cards kept on purpose: <code>Skullclamp</code> (primary draw engine with the token makers), <code>Pernicious Deed</code> (only sweeper, and recurrable by Tayam at MV 3), <code>Selfless Savior</code> and <code>Carrion Feeder</code> (MV 1 sac and protection pieces Tayam can return repeatedly). Their cheaper substitutes would lose synergy rather than just price.</li><li>No mana rocks or library-search cards are added, and neither two-card combo piece (<code>Devoted Druid</code>, <code>Warden of the Grove</code>) is included.</li></ul><p><strong>How this meets the budget goal</strong></p><ul><li>The swap saves about $15, bringing the estimated total from about $105 down to about $90, well under the $107 target and leaving room for future upgrades.</li></ul><p><strong>Expected gameplay impact</strong></p><ul><li>Card draw becomes more reliable in board stalls, since it no longer needs combat damage.</li><li>Better resilience to wraths: holding up {2}{G} protects the counter-loaded board and refills the hand.</li><li>Trade-off: loses Kutzil's stax effect (opponents can't cast spells during your turn) and one creature body (48 to 47 creatures).</li></ul>",
+  "archetype": "Aristocrats / +1/+1 Counters Midrange"
+}

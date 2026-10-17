@@ -17,17 +17,20 @@ We run its prompts through Claude a few times, capture each run, and use what we
 | Date | Tool | Deck | File | Verdict |
 |---|---|---|---|---|
 | 2026-10-17 | Tuner (Explore New Cards) | Tayam | [run](runs/2026-10-17-tuner-tayam.md) | Prompt is data-rich; import mis-matched 4 card names; filter too broad |
+| 2026-10-17 | Tuner (Budget Optimization) | Tayam | [run](runs/2026-10-17-budget-tayam.md) | One swap (Kutzil → Inspiring Call); deck already under target; name mis-import recurred |
 
 ## Patterns across runs
 
 ### What their prompts ask for
 - Full oracle text + EDHREC inclusion/synergy for every deck and pool card; synergy-first ranking; bracket as a ceiling; strict JSON with HTML tables (run 1)
+- Budget mode adds `priceUsd` per card, allows decklist changes, and offers Scryfall/EDHREC tool URLs plus a self-verification script (run 2)
 
 ### What our SOP adds
 - Deck house rules (no-search, MV caps, budget) the site prompt has no slot for (run 1)
 
 ### What we'd change in our own version
 - Verify every imported name before analysis; cap the candidate pool; read house rules from the deck's `CLAUDE.md` (run 1)
+- Cache prices in the deck repo; make the budget goal explicit (a target to get under vs. cut as far as possible) (run 2)
 
 ## Next step
 
