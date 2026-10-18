@@ -9,10 +9,18 @@
 ## Key Rules
 - Never reason about card text from memory — verify via Scryfall before any decision
 - Follow the lifecycle in `DECKBUILDING-SOP.md`
+- The repo decklist is the source of truth; sync pasted Moxfield exports into it (SOP §10)
+
+## Constraints
+- **Bracket / Game Changers:** [e.g. Bracket 3, 0 Game Changers]
+- **Budget:** [cap or "none"]
+- **House rules:** [e.g. no tutors, no infinite combos, no mana rocks]
+- **Universes Beyond:** [which crossover sets are OK, which to ask about]
 
 ## Environment & Tooling
-- **Card data:** [Scryfall MCP / WebSearch — note which is working and what the fallback is]
-- **Egress notes:** [Any network restrictions in this environment]
+- **Card data (verified YYYY-MM-DD):** [direct Scryfall REST / Scryfall MCP / WebSearch — which works, and the fallback]
+- **Community data (verified YYYY-MM-DD):** [EDHREC JSON open or 403; WebSearch fallback]
+- **Egress notes:** [Hosts blocked in this environment. Access differs per environment; re-probe per SOP Appendix A]
 
 ## Project Stages
 1. [ ] Phase 0 — Tooling verified

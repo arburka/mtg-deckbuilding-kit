@@ -38,8 +38,8 @@ Iteration is a loop: **Test → decide → ≤2 changes → re-test.** You will 
 The single biggest time-sink in a build is a card-data pipeline you *assumed* worked.
 
 - **Stand up a primary card-data source and a fallback, and prove both before researching.**
-  Run one real lookup through each path. (On Claude Code on the web, that's the Scryfall MCP +
-  WebSearch — see Appendix A.)
+  Run one real lookup through each path. (On Claude Code on the web, that's direct Scryfall REST
+  where the environment allows it, plus WebSearch. Access differs per environment — see Appendix A.)
 - **Verify before you reason.** Never assert card text from memory. Confirm every card via a
   primary source (Scryfall) before it informs a decision. **No card is added, cut, or
   reclassified before its text is confirmed.**
@@ -233,6 +233,13 @@ build at least once.)
   (no sac outlet; blink/bounce aren't deaths).
 - **Watch self-anti-synergy.** Your own "destroy all artifacts/enchantments," edicts, and symmetric
   taxes hit *your* pieces too. Read every wipe/removal card against your own board.
+- **A multiplier engine turns incremental effects into combos.** If the engine repeats a step
+  (extra upkeeps, extra combats, copied triggers), evaluate each payoff at the multiplied rate. A
+  "mill 10 per upkeep" card is a fast alternate win once upkeeps repeat. *(Obeka: Court of
+  Cunning rejected.)*
+- **An unbounded loop needs both directions.** "Gain life → opponents lose life" is bounded until a
+  card adds "opponent loses life → you gain life." To audit a no-infinites rule, search the oracle
+  cache for the reverse trigger, not just the forward one. *(Orzhov: Exquisite Blood cut.)*
 
 ---
 
@@ -284,10 +291,16 @@ end of every change that touches it** (stale counts/headers are the recurring dr
 | `land-reference.md` | exact production + fetch targets per land | mana-base changes |
 | `oracle-cache.md` | verified oracle text + approximate prices for every deck card and CANDIDATES entry | every version bump; price spot-check monthly |
 | an export (`moxfield.txt`) | importable list; regenerate from `decklist.md` | every version bump |
+| *optional:* a build script (`tools/build.py`) + machine-readable list (`deck.tsv`) | regenerates the cache, the export, and category counts; checks legality, color identity, Game Changers | every version bump |
 
 **Optional / create-when-needed:** a pending-routines queue (e.g. `PENDING-ROUTINES.md`) when a
 backlog of routines accrues; per-deck playtest findings (`PLAYTEST-FINDINGS.md`); a `RETROSPECTIVE.md`
 at the end of a build. Make these on demand — don't carry empty scaffolding between decks.
+
+**The repo is the source of truth, not the deckbuilding site.** Pasted Moxfield/Archidekt exports
+mangle names (split and MDFC cards, Universes Beyond reprint names) and silently drop cards. When the
+owner pastes an export, diff it against the repo list, sync the real changes in, and build from the
+repo file. *(Orzhov v4: a pasted 98-card list had four mangled names and two dropped cards.)*
 
 **`oracle-cache.md` — why it exists and how to maintain it.**
 Cloud routines (remote agents) cannot use the Scryfall MCP without interactive approval, and using
@@ -316,19 +329,52 @@ you're building elsewhere.
 **The environment.** An ephemeral sandbox behind an **egress allowlist**, cloned fresh per session.
 Anything worth keeping must be committed and pushed.
 
-**Card-data pipeline + the 403 gotcha.**
-- ⛔ **Blocked (HTTP 403):** anything whose network call originates *inside* the sandbox to a
-  non-allowlisted host — direct `curl`, `WebFetch`, and **local stdio MCP servers** reaching
-  `api.scryfall.com`, `data.scryfall.io`, `json.edhrec.com`, `mtgjson.com`, even `api.github.com`.
-- ✅ **Works:** **WebSearch** and **managed MCP servers** (they run *outside* the sandbox). Direct
-  fetch is allowed for `github.com`, `raw.githubusercontent.com`, `pypi.org`, `files.pythonhosted.org`.
-- **To make the Scryfall MCP + EDHREC live:** add `api.scryfall.com`, `data.scryfall.io`,
-  `json.edhrec.com` to the environment's network policy (web → environment settings). Then a
-  `.mcp.json`-registered Scryfall server + a SessionStart hook that provisions its venv go live next
-  session. **Fallback is always WebSearch** — never stall on a 403.
+**Card-data access depends on the environment, not the runtime.** Each cloud environment has
+its own network policy, and the same host can be open in one deck's environment and blocked
+(HTTP 403 on CONNECT) in another's. Never copy another deck's "works" note; probe at the start of
+every session that needs the network.
 
-**Session-start hook.** Provision the MCP venv each session via `.claude/hooks/session-start.sh`
-(registered for SessionStart). It re-creates anything the ephemeral container loses.
+Observed so far (re-verify; these are snapshots, not guarantees):
+
+| Date | Environment | Scryfall REST | EDHREC JSON | Other | Source |
+|---|---|---|---|---|---|
+| 2026-06-02 | `mtg-simic-etb` | ⛔ 403 | ⛔ 403 | `mtgjson.com`, `api.github.com` ⛔ | Simic `CLAUDE.md` |
+| 2026-10-17 | `mtg-obeka-upkeeps` | ✅ | ✅ | — | Obeka `CLAUDE.md` |
+| 2026-10-18 | `mtg-orzhov-extort` | ✅ | ⛔ 403 | — | Orzhov `CLAUDE.md` |
+| 2026-10-18 | MTG project (built-in env) | ⛔ 403 | ⛔ 403 | `data.scryfall.io`, `edhrec.com`, `mtgjson.com`, Moxfield and Archidekt APIs ⛔; `api.github.com`, `raw.githubusercontent.com`, `pypi.org` ✅ | kit re-verify |
+
+What has held in every environment so far:
+- ✅ **WebSearch** and **managed MCP servers** (e.g. GitHub MCP) work, because they run *outside*
+  the sandbox. WebSearch restricted to `scryfall.com` / `gatherer.wizards.com` is the universal
+  fallback.
+- ⛔ **Local stdio MCP servers** make their calls from inside the sandbox, so they are only as open
+  as direct `curl`. A local Scryfall MCP gains nothing over a direct REST script.
+
+**Probe (one line per host, ~5 seconds):**
+
+```bash
+for u in "https://api.scryfall.com/cards/named?exact=Sol%20Ring" \
+         "https://json.edhrec.com/pages/commanders/atraxa-praetors-voice.json"; do
+  printf '%s  %s\n' "$(curl -s -o /dev/null -w '%{http_code}' -A 'mtg-deck/1.0' --max-time 15 "$u")" "$u"
+done   # 200 = open; 000 = blocked by policy (curl -sS shows "CONNECT tunnel failed, response 403")
+```
+
+Record the result with its date in the deck's `CLAUDE.md` → Environment & Tooling.
+
+**When Scryfall is blocked:**
+- Read `oracle-cache.md` first; it is the reason the cache exists (§10).
+- Verify new cards by WebSearch on `scryfall.com` (≥2 sources for exact wording), then add them to
+  the cache by hand.
+- A build script that needs direct Scryfall (e.g. Orzhov's `tools/build.py`) can't regenerate the
+  cache; edit the deck file, recount by hand, and re-run the script in a session where it is open.
+- To open the host, add `api.scryfall.com` (and `json.edhrec.com` if wanted) under the
+  environment's allowed domains (Claude Code on the web → environment settings → Network access).
+  Sessions started afterwards pick it up.
+- **Fallback is always WebSearch** — never stall on a 403.
+
+**Session-start hook (optional).** If the deck uses a local MCP or Python dependencies, provision
+them each session via `.claude/hooks/session-start.sh` (registered for SessionStart). It re-creates
+anything the ephemeral container loses. Stdlib-only scripts (`urllib`, `json`) need no hook.
 
 **Scheduled playtest routines (optional automation).** Playtests can run as scheduled remote agents
 that read the repo, append findings to `RESEARCH-LOG.md`, apply supported changes, and commit:
@@ -402,3 +448,40 @@ Yuna, Hope of Spira and Rydia, Summoner of Mist both return cards with finality 
 
 **Saga copy tokens are sacrificed before combat via SBA — not after.**
 When Esper Terra copies a Saga, the token enters with 1 lore counter, Terra immediately adds up to 3 more, all chapter triggers fire, and the Saga SBA sacrifices the token before the main phase ends — well before combat. Any "win condition" that requires the copy to deal combat damage (e.g. Summon: Primal Odin's Zantetsuken) will never trigger on a Terra-made copy. Verify copy-dependent win conditions explicitly against SBA timing before including them.
+
+---
+
+### Deck 3: Obeka, Splitter of Seconds (2026-10-17 → ongoing, v1–v11)
+*Source repo: `arburka/mtg-obeka-upkeeps`. Grixis extra-upkeep engine. Phase 4, unplaytested at the table.*
+
+**A seeded goldfish sim turns "it feels slow" into a structural answer.**
+`sim/goldfish.py` (stdlib Python, ~250 lines) plays 20,000 seeded games on the play, ignores colors and draw spells, spends mana greedily, and reports "online by T6 / T8 / never," plus a wipe-recovery scenario. It showed the owner's complaint ("struggles to set up before getting disrupted") was structural: each extra payoff the kill waits for roughly halves online-by-T6 (61% at 1 payoff, 29% at 2, 7% at 3), and no single swap moved it more than 4 points. The fix was fewer pieces per kill plus a play pattern ("attack with evasion and one payoff"), not more power. How to reuse it:
+- Test each candidate as a **single swap against the baseline**, then as a package (§6).
+- Record the seed and the exact command in the self-eval (`python3 sim/goldfish.py moxfield.txt --need 2 --seed 17`), so every version is compared on the same games.
+- Write the model's blind spots into the script header and the log. This sim undervalues magnitude (Paradox Haze doubling payoffs) and doesn't model protection at all; weigh those by hand.
+
+**Owner overrides of the SOP are identity decisions; record them so they aren't "fixed."**
+The owner cut every mana rock (ramp far under target) and applied batches of 5–8 swaps. Both go in `CLAUDE.md` → Key Decisions with "owner's call, don't fix without asking," and the self-eval marks the batch-size item ‼️ with the reason instead of pretending it passed. Later sessions then measure the cost (the sim logged the goldfish speed lost) instead of re-proposing rocks.
+
+**Verification reverses memory-based tune-ups.**
+A tune-up written from memory before Phase 0 got three calls wrong (cut two instant-speed pumps that are finishers here, cut a card that extra upkeeps turn into a draw burst, and mislabeled a Game Changer). Re-checking against Scryfall reversed all three. Treat any pre-verification analysis as a draft to re-audit, not a starting list.
+
+**Declare a flavor direction as the tiebreaker.**
+`CLAUDE.md` names the theme (time manipulation) and says: when two cards do the same job, prefer the on-theme one. It settled many slot decisions quickly and kept the "fun over optimal" brief concrete.
+
+---
+
+### Deck 4: Sorin of House Markov / Orzhov Extort (2026-10-18 → ongoing, v1–v4.7)
+*Source repo: `arburka/mtg-orzhov-extort`. Extort drain with lifegain → drain payoffs. Phase 4, unplaytested.*
+
+**Make the oracle cache a build artifact.**
+`tools/build.py` (stdlib Python) reads `deck.tsv` (qty, name, section, comma-separated roles), fetches every card from Scryfall's `/cards/collection` endpoint (75 per request), and in one run: regenerates `oracle-cache.md` and `moxfield.txt`, prints overlap-inclusive category counts against the template targets, and flags color-identity violations, non-legal cards, and Game Changers. The cache never drifts from the list, and the recount after each swap is free. It needs direct Scryfall access, so probe first (Appendix A); when blocked, edit `deck.tsv` and the cache by hand and re-run later.
+
+**The repo is the source of truth (now in §10).**
+A pasted 98-card Moxfield list had four import-mangled names and two missing cards. v4 was built from `deck.tsv`, and the owner's later land update was diffed and synced in rather than taken wholesale.
+
+**Record a Universes Beyond policy per owner, and check printings, not names.**
+The owner's rule: Final Fantasy and LotR are usually fine; Marvel, TMNT and similar are case by case (ask before adding, don't cut just for being UB); other UB sets, ask. A card is UB-only if every printing matches Scryfall `is:ub`. Reprint names resolve to one Oracle name (Heaven-Sent Marvel, MAR 41 = Archangel of Thune), so keep the Oracle name in the list and prefer the non-UB printing.
+
+**Category definitions belong to the owner.**
+The owner doesn't count conditional mana (Crypt Ghast, Cabal Coffers, Treasure makers) as ramp. The cards were retagged as enhancers and the build script's ramp target set to 0, instead of arguing the template. The same goes for "no tutors," "no Game Changers," and "no infinite combos": write each into `CLAUDE.md` Constraints with the date.
