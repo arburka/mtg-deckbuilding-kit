@@ -1,6 +1,6 @@
 # Candidate Cards — evaluated, not yet in the deck
 
-> All entries must be verified via Scryfall MCP before adding (oracle text + color identity).
+> All entries must be verified via Scryfall (direct, MCP, or WebSearch fallback) before adding (oracle text + color identity).
 > Nothing here is applied to `decklist.md` until triaged to ≤2 swaps with a named cut.
 
 ## Priority ranking (current pool)
